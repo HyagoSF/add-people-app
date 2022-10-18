@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 
 import classes from './AddUser.module.css';
 
@@ -6,9 +6,20 @@ import Card from '../UI/Card';
 import Button from '../UI/Button';
 
 const AddUser = (props) => {
+	const [enteredUsername, setEnteredUsername] = useState('');
+	const [enteredAge, setEnteredAge] = useState('');
+
 	const addUserHandler = (event) => {
 		event.preventDefault();
-		console.log('hello');
+		console.log(enteredUsername, enteredAge);
+	};
+
+	const usernameChangeHandler = (event) => {
+		setEnteredUsername(event.target.value);
+	};
+
+	const ageChangeHandler = (event) => {
+		setEnteredAge(event.target.value);
 	};
 
 	return (
@@ -19,12 +30,16 @@ const AddUser = (props) => {
 			<form onSubmit={addUserHandler}>
 				{/* htmlFor => for assigning that for attribute to a label */}
 				<label htmlFor="username">Username</label>
-				<input id="username" type="text" />
+				<input
+					id="username"
+					type="text"
+					onChange={usernameChangeHandler}
+				/>
 
 				<label htmlFor="age">Age (Years)</label>
-				<input id="age" type="number" />
+				<input id="age" type="number" onChange={ageChangeHandler} />
 
-				<Button className={classes.button} type="">
+				<Button className={classes.button} type="submit">
 					Add User
 				</Button>
 			</form>

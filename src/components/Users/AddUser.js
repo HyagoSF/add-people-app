@@ -11,7 +11,24 @@ const AddUser = (props) => {
 
 	const addUserHandler = (event) => {
 		event.preventDefault();
+
+		if (
+			//trim() to remove spaces at the beginning and the end, I don't need trim() to number's inputs, cause I can't write spaces in it
+			enteredUsername.trim().length === 0 ||
+			enteredAge.length === 0
+		) {
+			//I'll return the function and doing it the rest of the code doesn't execute
+			return;
+		}
+		//enteredAge is given in a String, to convert it to a number is just use the + operator in the front of the variable
+		if (+enteredAge < 1) {
+			return;
+		}
+
 		console.log(enteredUsername, enteredAge);
+		//to reset the value of age and username after being showed, do this, and add a value to the input
+		setEnteredUsername('');
+		setEnteredAge('');
 	};
 
 	const usernameChangeHandler = (event) => {
@@ -34,10 +51,16 @@ const AddUser = (props) => {
 					id="username"
 					type="text"
 					onChange={usernameChangeHandler}
+					value={enteredUsername}
 				/>
 
 				<label htmlFor="age">Age (Years)</label>
-				<input id="age" type="number" onChange={ageChangeHandler} />
+				<input
+					id="age"
+					type="number"
+					onChange={ageChangeHandler}
+					value={enteredAge}
+				/>
 
 				<Button className={classes.button} type="submit">
 					Add User

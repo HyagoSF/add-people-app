@@ -51,7 +51,7 @@ export default function UserInput(props) {
 					id="age"
 				/>
 
-				<Button />
+				<Button className={classes.button}>Add User</Button>
 			</form>
 		</Card>
 	);

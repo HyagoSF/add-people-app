@@ -25,8 +25,10 @@ const AddUser = (props) => {
 			return;
 		}
 
-		console.log(enteredUsername, enteredAge);
-		//to reset the value of age and username after being showed, do this, and add a value to the input
+		//to pass the actual username and the current age to props.onAddUser(this is a function on the parent component, a function that accepts 2 parameters)
+		props.onAddUser(enteredUsername, enteredAge);
+
+		//to reset the value after being showed, additionally add a `value` property to the input
 		setEnteredUsername('');
 		setEnteredAge('');
 	};

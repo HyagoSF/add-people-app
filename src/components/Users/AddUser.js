@@ -4,6 +4,7 @@ import classes from './AddUser.module.css';
 
 import Card from '../UI/Card';
 import Button from '../UI/Button';
+import ErrorModal from '../UI/ErrorModal';
 
 const AddUser = (props) => {
 	const [enteredUsername, setEnteredUsername] = useState('');
@@ -42,33 +43,40 @@ const AddUser = (props) => {
 	};
 
 	return (
-		// 1- to be able to add classes css in my custom elements I have to enter them and...
-		<Card className={classes.input}>
-			{/* do not add the parenthesis in here because it would instantly
+		// 1- to be able to add classes css in my custom elements I have to
+		// enter them and...
+		<div>
+			<ErrorModal
+				title="An Error Occurred"
+				message="Something went wrong"
+			/>
+			<Card className={classes.input}>
+				{/* do not add the parenthesis in here because it would instantly
 			execute the function */}
-			<form onSubmit={addUserHandler}>
-				{/* htmlFor => for assigning that for attribute to a label */}
-				<label htmlFor="username">Username</label>
-				<input
-					id="username"
-					type="text"
-					onChange={usernameChangeHandler}
-					value={enteredUsername}
-				/>
+				<form onSubmit={addUserHandler}>
+					{/* htmlFor => for assigning that for attribute to a label */}
+					<label htmlFor="username">Username</label>
+					<input
+						id="username"
+						type="text"
+						onChange={usernameChangeHandler}
+						value={enteredUsername}
+					/>
 
-				<label htmlFor="age">Age (Years)</label>
-				<input
-					id="age"
-					type="number"
-					onChange={ageChangeHandler}
-					value={enteredAge}
-				/>
+					<label htmlFor="age">Age (Years)</label>
+					<input
+						id="age"
+						type="number"
+						onChange={ageChangeHandler}
+						value={enteredAge}
+					/>
 
-				<Button className={classes.button} type="submit">
-					Add User
-				</Button>
-			</form>
-		</Card>
+					<Button className={classes.button} type="submit">
+						Add User
+					</Button>
+				</form>
+			</Card>
+		</div>
 	);
 };
 

@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/add-people-app/static/css/main.b0124746.css",
+    "main.js": "/add-people-app/static/js/main.1ede7d23.js",
+    "index.html": "/add-people-app/index.html",
+    "main.b0124746.css.map": "/add-people-app/static/css/main.b0124746.css.map",
+    "main.1ede7d23.js.map": "/add-people-app/static/js/main.1ede7d23.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b0124746.css",
+    "static/js/main.1ede7d23.js"
+  ]
+}

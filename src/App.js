@@ -7,7 +7,6 @@ export default function App() {
 	const [usersProfile, setUserProfile] = useState([]);
 
 	function onAddUserHandler(uName, uAge) {
-		console.log(setUserProfile);
 		setUserProfile((previousState) => {
 			return [
 				...previousState,
@@ -16,10 +15,21 @@ export default function App() {
 		});
 	}
 
+	function onRemoveUserHandler(id) {
+		setUserProfile(
+			usersProfile.filter((user) => {
+				return user.id !== id;
+			})
+		);
+	}
+
 	return (
 		<>
 			<UserInput onAddUser={onAddUserHandler} />
-			<UsersList users={usersProfile} />
+			<UsersList
+				users={usersProfile}
+				onRemoveUser={onRemoveUserHandler}
+			/>
 		</>
 	);
 }

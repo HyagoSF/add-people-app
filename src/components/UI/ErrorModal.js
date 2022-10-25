@@ -7,7 +7,7 @@ import Card from './Card';
 export default function ErrorModal(props) {
 	return (
 		<div>
-			<div className={classes.backdrop} />
+			<div className={classes.backdrop} onClick={props.onOkay} />
 			<Card className={classes.modal}>
 				<header className={classes.header}>
 					<h2>{props.title}</h2>
@@ -16,7 +16,7 @@ export default function ErrorModal(props) {
 					<p>{props.message}</p>
 				</div>
 				<footer className={classes.actions}>
-					<Button>Ok</Button>
+					<Button onClick={props.onOkay}>Ok</Button>
 				</footer>
 			</Card>
 		</div>

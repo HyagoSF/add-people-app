@@ -9,6 +9,7 @@ import ErrorModal from '../UI/ErrorModal';
 const AddUser = (props) => {
 	const [enteredUsername, setEnteredUsername] = useState('');
 	const [enteredAge, setEnteredAge] = useState('');
+	const [error, setError] = useState();
 
 	const addUserHandler = (event) => {
 		event.preventDefault();
@@ -18,11 +19,21 @@ const AddUser = (props) => {
 			enteredUsername.trim().length === 0 ||
 			enteredAge.length === 0
 		) {
+			// I'm gonna set the error JUST if
+			setError({
+				title: 'Invalid Input',
+				message:
+					'Please set a valid Username and age correctly, no empty boxes',
+			});
 			//I'll return the function and doing it the rest of the code doesn't execute
 			return;
 		}
 		//enteredAge is given in a String, to convert it to a number is just use the + operator in the front of the variable
 		if (+enteredAge < 1) {
+			setError({
+				title: 'Invalid Age',
+				message: 'Please enter a valid age ( > 0)',
+			});
 			return;
 		}
 
@@ -42,14 +53,22 @@ const AddUser = (props) => {
 		setEnteredAge(event.target.value);
 	};
 
+	const ErrorHandler = () => {
+		setError(null);
+	};
+
 	return (
 		// 1- to be able to add classes css in my custom elements I have to
 		// enter them and...
 		<div>
-			<ErrorModal
-				title="An Error Occurred"
-				message="Something went wrong"
-			/>
+			{/* if there is an error, render the ErrorModal */}
+			{error && (
+				<ErrorModal
+					title={error.title}
+					message={error.message}
+					onOkay={ErrorHandler}
+				/>
+			)}
 			<Card className={classes.input}>
 				{/* do not add the parenthesis in here because it would instantly
 			execute the function */}

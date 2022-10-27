@@ -1,17 +1,21 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import classes from './ErrorModal.module.css';
 
+//Using Portals here, to render the modal above everything on the DOM
+
+const backdropDOM = document.getElementById('backdrop');
+const modalOverlayDOM = document.getElementById('modal-overlay');
 
 const Backdrop = (props) => {
-	return 
-}
+	return <div className={classes.backdrop} onClick={props.onConfirm} />;
+};
 
-export default function ErrorModal(props) {
+const ModalOverlay = (props) => {
 	return (
 		<div>
-			<div className={classes.backdrop} onClick={props.onConfirm} />
 			<Card className={classes.modal}>
 				<header className={classes.header}>
 					<h2>{props.title}</h2>
@@ -23,6 +27,26 @@ export default function ErrorModal(props) {
 					<Button onClick={props.onConfirm}>Okay</Button>
 				</footer>
 			</Card>
+		</div>
+	);
+};
+
+export default function ErrorModal(props) {
+	return (
+		<div>
+			{ReactDOM.createPortal(
+				<Backdrop onConfirm={props.onConfirm} />,
+				backdropDOM
+			)}
+			,
+			{ReactDOM.createPortal(
+				<ModalOverlay
+					title={props.title}
+					message={props.message}
+					onConfirm={props.onConfirm}
+				/>,
+				modalOverlayDOM
+			)}
 		</div>
 	);
 }

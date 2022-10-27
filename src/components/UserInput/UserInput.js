@@ -1,21 +1,31 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import classes from './UserInput.module.css';
 import ErrorModal from '../UI/ErrorModal';
 
+//in comments are all the steps of doing using useState instead of doing with useRef
+
 export default function UserInput(props) {
-	const [enteredUsername, setEnteredUsername] = useState('');
-	const [enteredAge, setEnteredAge] = useState('');
+	// const [enteredUsername, setEnteredUsername] = useState('');
+	// const [enteredAge, setEnteredAge] = useState('');
 	const [error, setError] = useState();
+
+	//Creating my Ref's
+	const enteredUsername = useRef();
+	const enteredAge = useRef();
 
 	const formSubmitHandler = (event) => {
 		event.preventDefault();
 
+		//and here when I submit my form I'll create these 2 variables that holds the input values
+		const enteredName = enteredUsername.current.value;
+		const enteredUserAge = enteredAge.current.value;
+
 		if (
-			enteredUsername.trim().length === 0 ||
-			enteredAge.trim().length === 0
+			enteredName.trim().length === 0 ||
+			enteredUserAge.trim().length === 0
 		) {
 			setError({
 				title: 'Username error',
@@ -24,7 +34,7 @@ export default function UserInput(props) {
 			return;
 		}
 
-		if (enteredAge < 0) {
+		if (enteredUserAge < 0) {
 			setError({
 				title: 'Age error',
 				message: 'Please enter a age bigger than 0',
@@ -32,19 +42,20 @@ export default function UserInput(props) {
 			return;
 		}
 
-		props.onAddUser(enteredUsername, enteredAge);
+		//and I'll pass those values to my app render there on UsersList
+		props.onAddUser(enteredName, enteredUserAge);
 
-		setEnteredAge('');
-		setEnteredUsername('');
+		// setEnteredAge('');
+		// setEnteredUsername('');
 	};
 
-	const usernameInputChangeHandler = (event) => {
-		setEnteredUsername(event.target.value);
-	};
+	// const usernameInputChangeHandler = (event) => {
+	// 	setEnteredUsername(event.target.value);
+	// };
 
-	const ageInputChangeHandler = (event) => {
-		setEnteredAge(event.target.value);
-	};
+	// const ageInputChangeHandler = (event) => {
+	// 	setEnteredAge(event.target.value);
+	// };
 
 	const ErrorHandler = () => {
 		setError(null);
@@ -65,17 +76,19 @@ export default function UserInput(props) {
 					<label>Username</label>
 					<input
 						type="text"
-						onChange={usernameInputChangeHandler}
 						id="username"
-						value={enteredUsername}
+						// onChange={usernameInputChangeHandler}
+						// value={enteredUsername}
+						ref={enteredUsername}
 					/>
 
 					<label>Age (years)</label>
 					<input
 						type="number"
-						onChange={ageInputChangeHandler}
 						id="age"
-						value={enteredAge}
+						// onChange={ageInputChangeHandler}
+						// value={enteredAge}
+						ref={enteredAge}
 					/>
 
 					<Button className={classes.button}>Add User</Button>

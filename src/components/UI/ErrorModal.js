@@ -3,6 +3,11 @@ import Card from '../UI/Card';
 import Button from '../UI/Button';
 import classes from './ErrorModal.module.css';
 
+
+const Backdrop = (props) => {
+	return 
+}
+
 export default function ErrorModal(props) {
 	return (
 		<div>

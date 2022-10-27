@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import classes from './UserInput.module.css';
-import ErrorModal from './ErrorModal';
+import ErrorModal from '../UI/ErrorModal';
 
 export default function UserInput(props) {
 	const [enteredUsername, setEnteredUsername] = useState('');
@@ -51,7 +51,7 @@ export default function UserInput(props) {
 	};
 
 	return (
-		<div>
+		<React.Fragment>
 			{error && (
 				<ErrorModal
 					title={error.title}
@@ -81,6 +81,6 @@ export default function UserInput(props) {
 					<Button className={classes.button}>Add User</Button>
 				</form>
 			</Card>
-		</div>
+		</React.Fragment>
 	);
 }
